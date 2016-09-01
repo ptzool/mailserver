@@ -5,7 +5,7 @@ ENV TINI_VER=0.9.0
 
 RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y -q --no-install-recommends  \
     postfix postfix-mysql postfix-pcre postgrey \
-    dovecot-core dovecot-imapd dovecot-lmtpd dovecot-mysql dovecot-sieve dovecot-managesieved \
+    dovecot-core dovecot-imapd dovecot-pop3d dovecot-lmtpd dovecot-mysql dovecot-sieve dovecot-managesieved \
     opendkim opendkim-tools opendmarc \
     amavisd-new amavisd-milter spamassassin clamav-daemon clamav-milter \
     libsys-syslog-perl libmail-spf-perl libhttp-message-perl altermime \
@@ -22,7 +22,7 @@ RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y -q --no-
  && cp -r /usr/share/locale/en\@* /tmp/ && rm -rf /usr/share/locale/* && mv /tmp/en\@* /usr/share/locale/
 
 VOLUME /var/mail /var/lib/dovecot /etc/opendkim/keys /etc/letsencrypt
-EXPOSE 25 143 465 587 993 4190
+EXPOSE 25 110 143 465 587 993 995 4190
 
 COPY rootfs /
 CMD ["tini","--","startup"]
